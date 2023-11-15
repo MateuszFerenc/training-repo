@@ -1,6 +1,6 @@
 import unittest
 from subprocess import run
-from random import randrange
+from random import randint
 
 # test if file exists
 
@@ -31,8 +31,8 @@ class UnitConverters:
 class TestTemperatureConverter(unittest.TestCase):
     temp_converter = UnitConverters()
     def test_celsius_to_celsius_good_high(self):
-        temperature = round((randrange(10000, 50000)/100), 2)
-        input_data = f"{temperature}\nC\nC"
+        temperature = round((randint(10000, 50000)/100), 2)
+        input_data = f"{temperature}\nC\nC\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Celsius"), 2)
         expected_output = f"{expected_temperature} °C"
 
@@ -41,8 +41,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_celsius_good_medium(self):
-        temperature = round((randrange(0, 10000)/100), 2)
-        input_data = f"{temperature}\nC\nC"
+        temperature = round((randint(0, 10000)/100), 2)
+        input_data = f"{temperature}\nC\nC\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Celsius"), 2)
         expected_output = f"{expected_temperature} °C"
 
@@ -51,8 +51,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_celsius_good_low(self):
-        temperature = round((randrange(-27315, 0)/100), 2)
-        input_data = f"{temperature}\nC\nC"
+        temperature = round((randint(-27315, 0)/100), 2)
+        input_data = f"{temperature}\nC\nC\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Celsius"), 2)
         expected_output = f"{expected_temperature} °C"
 
@@ -60,8 +60,8 @@ class TestTemperatureConverter(unittest.TestCase):
 
         self.assertIn(expected_output, process.stdout)
 
-    def test_celsius_to_celsius_bad(self):
-        input_data = f"24degrees\nC\nC"
+    def test_celsius_bad(self):
+        input_data = f"24degrees\nC\nC\n"
         expected_output = f"format of entered temperature is wrong, not a number"
 
         process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
@@ -69,8 +69,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_below_zero(self):
-        temperature = round((randrange(-99999, -27315)/100), 2)
-        input_data = f"{temperature}\nC\nC"
+        temperature = round((randint(-99999, -27315)/100), 2)
+        input_data = f"{temperature}\nC\nC\n"
         expected_output = f"temperature is below absolute zero, conversion is not possible"
 
         process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
@@ -78,8 +78,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_fahrenheit_good_high(self):
-        temperature = round((randrange(10000, 50000)/100), 2)
-        input_data = f"{temperature}\nC\nF"
+        temperature = round((randint(10000, 50000)/100), 2)
+        input_data = f"{temperature}\nC\nF\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Fahrenheit"), 2)
         expected_output = f"{expected_temperature} °F"
 
@@ -88,8 +88,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_fahrenheit_good_medium(self):
-        temperature = round((randrange(0, 10000)/100), 2)
-        input_data = f"{temperature}\nC\nF"
+        temperature = round((randint(0, 10000)/100), 2)
+        input_data = f"{temperature}\nC\nF\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Fahrenheit"), 2)
         expected_output = f"{expected_temperature} °F"
 
@@ -98,8 +98,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_fahrenheit_good_low(self):
-        temperature = round((randrange(-27315, 0)/100), 2)
-        input_data = f"{temperature}\nC\nF"
+        temperature = round((randint(-27315, 0)/100), 2)
+        input_data = f"{temperature}\nC\nF\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Fahrenheit"), 2)
         expected_output = f"{expected_temperature} °F"
 
@@ -107,17 +107,9 @@ class TestTemperatureConverter(unittest.TestCase):
 
         self.assertIn(expected_output, process.stdout)
 
-    def test_celsius_to_fahrenheit_bad(self):
-        input_data = f"24degrees\nC\nF"
-        expected_output = f"format of entered temperature is wrong, not a number"
-
-        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
-
-        self.assertIn(expected_output, process.stdout)
-
     def test_celsius_to_kelvin_good_high(self):
-        temperature = round((randrange(10000, 50000)/100), 2)
-        input_data = f"{temperature}\nC\nK"
+        temperature = round((randint(10000, 50000)/100), 2)
+        input_data = f"{temperature}\nC\nK\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Kelvin"), 2)
         expected_output = f"{expected_temperature} K"
 
@@ -126,8 +118,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_kelvin_good_medium(self):
-        temperature = round((randrange(0, 10000)/100), 2)
-        input_data = f"{temperature}\nC\nK"
+        temperature = round((randint(0, 10000)/100), 2)
+        input_data = f"{temperature}\nC\nK\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Kelvin"), 2)
         expected_output = f"{expected_temperature} K"
 
@@ -136,8 +128,8 @@ class TestTemperatureConverter(unittest.TestCase):
         self.assertIn(expected_output, process.stdout)
 
     def test_celsius_to_kelvin_good_low(self):
-        temperature = round((randrange(-27315, 0)/100), 2)
-        input_data = f"{temperature}\nC\nK"
+        temperature = round((randint(-27315, 0)/100), 2)
+        input_data = f"{temperature}\nC\nK\n"
         expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Celsius", "Kelvin"), 2)
         expected_output = f"{expected_temperature} K"
 
@@ -145,97 +137,243 @@ class TestTemperatureConverter(unittest.TestCase):
 
         self.assertIn(expected_output, process.stdout)
 
-    def test_celsius_to_kelvin_bad(self):
-        input_data = f"24degrees\nC\nK"
+    def test_fahrenheit_to_celsius_good_high(self):
+        temperature = round((randint(21200, 93200)/100), 2)
+        input_data = f"{temperature}\nF\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_to_celsius_good_medium(self):
+        temperature = round((randint(3200, 21200)/100), 2)
+        input_data = f"{temperature}\nF\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_to_celsius_good_low(self):
+        temperature = round((randint(-45967, -3200)/100), 2)
+        input_data = f"{temperature}\nF\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_to_fahrenheit_good_high(self):
+        temperature = round((randint(21200, 93200)/100), 2)
+        input_data = f"{temperature}\nF\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_to_fahrenheit_good_medium(self):
+        temperature = round((randint(3200, 21200)/100), 2)
+        input_data = f"{temperature}\nF\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_to_fahrenheit_good_low(self):
+        temperature = round((randint(-45967, -3200)/100), 2)
+        input_data = f"{temperature}\nF\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_fahrenheit_bad(self):
+        input_data = f"24degrees\nF\nF\n"
         expected_output = f"format of entered temperature is wrong, not a number"
 
         process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
 
         self.assertIn(expected_output, process.stdout)
 
-    def test_fahrenheit_to_celsius_good_high(self):
-        pass
+    def test_fahrenheit_below_zero(self):
+        temperature = round((randint(-99999, -45967)/100), 2)
+        input_data = f"{temperature}\nF\nF\n"
+        expected_output = f"temperature is below absolute zero, conversion is not possible"
 
-    def test_fahrenheit_to_celsius_good_medium(self):
-        pass
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
 
-    def test_fahrenheit_to_celsius_good_low(self):
-        pass
-
-    def test_fahrenheit_to_celsius_bad(self):
-        pass
-
-    def test_fahrenheit_to_fahrenheit_good_high(self):
-        pass
-
-    def test_fahrenheit_to_fahrenheit_good_medium(self):
-        pass
-
-    def test_fahrenheit_to_fahrenheit_good_low(self):
-        pass
-
-    def test_fahrenheit_to_fahrenheit_bad(self):
-        pass
+        self.assertIn(expected_output, process.stdout)
 
     def test_fahrenheit_to_kelvin_good_high(self):
-        pass
+        temperature = round((randint(21200, 93200)/100), 2)
+        input_data = f"{temperature}\nF\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_fahrenheit_to_kelvin_good_medium(self):
-        pass
+        temperature = round((randint(3200, 21200)/100), 2)
+        input_data = f"{temperature}\nF\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_fahrenheit_to_kelvin_good_low(self):
-        pass
+        temperature = round((randint(-45967, -3200)/100), 2)
+        input_data = f"{temperature}\nF\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Fahrenheit", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
 
-    def test_fahrenheit_to_kelvin_bad(self):
-        pass
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_celsius_good_high(self):
-        pass
+        temperature = round((randint(37315, 77315)/100), 2)
+        input_data = f"{temperature}\nK\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_celsius_good_medium(self):
-        pass
+        temperature = round((randint(27315, 37315)/100), 2)
+        input_data = f"{temperature}\nK\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_celsius_good_low(self):
-        pass
+        temperature = round((randint(0, 27315)/100), 2)
+        input_data = f"{temperature}\nK\nC\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Celsius"), 2)
+        expected_output = f"{expected_temperature} °C"
 
-    def test_kelvin_to_celsius_bad(self):
-        pass
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_fahrenheit_good_high(self):
-        pass
+        temperature = round((randint(37315, 77315)/100), 2)
+        input_data = f"{temperature}\nK\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_fahrenheit_good_medium(self):
-        pass
+        temperature = round((randint(27315, 37315)/100), 2)
+        input_data = f"{temperature}\nK\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_fahrenheit_good_low(self):
-        pass
+        temperature = round((randint(0, 27315)/100), 2)
+        input_data = f"{temperature}\nK\nF\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Fahrenheit"), 2)
+        expected_output = f"{expected_temperature} °F"
 
-    def test_kelvin_to_fahrenheit_bad(self):
-        pass
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_kelvin_good_high(self):
-        pass
+        temperature = round((randint(37315, 77315)/100), 2)
+        input_data = f"{temperature}\nK\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_kelvin_good_medium(self):
-        pass
+        temperature = round((randint(27315, 37315)/100), 2)
+        input_data = f"{temperature}\nK\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_kelvin_to_kelvin_good_low(self):
-        pass
+        temperature = round((randint(0, 27315)/100), 2)
+        input_data = f"{temperature}\nK\nK\n"
+        expected_temperature = round(self.temp_converter.convert_temperature(temperature, "Kelvin", "Kelvin"), 2)
+        expected_output = f"{expected_temperature} K"
 
-    def test_kelvin_to_kelvin_bad(self):
-        pass
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_kelvin_bad(self):
+        input_data = f"24degrees\nK\nK"
+        expected_output = f"format of entered temperature is wrong, not a number"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
+
+    def test_kelvin_below_zero(self):
+        temperature = round((randint(-1, -10000)/100), 2)
+        input_data = f"{temperature}\nK\nK\n"
+        expected_output = f"temperature is below absolute zero, conversion is not possible"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
     def test_unit_1_wrong(self):
-        unit_1 = randrange(65, 90)
-        input_data = f"36.66\n\nC"
-        expected_output = f"format of entered temperature is wrong, not a number"
+        while True:
+            unit_1 = chr(randint(65, 90))
+            if unit_1 not in ["C", "F", "K"]:
+                break
+        input_data = f"36.66\n{unit_1}\nC\n"
+        expected_output = f"unit not recognized"
 
         process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
 
         self.assertIn(expected_output, process.stdout)
 
     def test_unit_2_wrong(self):
-        pass
+        while True:
+            unit_2 = chr(randint(65, 90))
+            if unit_2 not in ["C", "F", "K"]:
+                break
+        input_data = f"36.66\nC\n{unit_2}\n"
+        expected_output = f"unit not recognized"
+
+        process = run(['python', executable], input=input_data.encode(), capture_output=True, text=True)
+
+        self.assertIn(expected_output, process.stdout)
 
 
 if __name__ == "__main__":
